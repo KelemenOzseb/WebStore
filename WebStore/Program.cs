@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using WebStore.Data;
 
 namespace WebStore.Endpoint
 {
@@ -8,6 +10,11 @@ namespace WebStore.Endpoint
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<ShopContext>(options =>
+            {
+                options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StoreDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;MultipleActiveResultSets=True");
+                options.UseLazyLoadingProxies();
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

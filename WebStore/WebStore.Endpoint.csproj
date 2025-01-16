@@ -22,4 +22,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebStore.Data\WebStore.Data.csproj" />
+    <ProjectReference Include="..\WebStore.Entities\WebStore.Entities.csproj" />
+    <ProjectReference Include="..\WebStore.Logic\WebStore.Logic.csproj" />
+  </ItemGroup>
+
 </Project>
