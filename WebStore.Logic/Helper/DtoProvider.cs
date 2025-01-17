@@ -36,7 +36,8 @@ namespace WebStore.Logic.Helper
                 {
                     dest.TotalItemsCount = src.Items?.Count() > 0 ? src.Items.Count() : 0;
                     dest.AvargePrice = src.Items?.Count() > 0 ? src.Items.Average(r => r.Price) : 0;
-                    dest.Reliability = src.Items?.Where(x => x.Ratings?.Count() > 0).Count() > 0 ? src.Items.Count() - src.Items.Where(x => x.Ratings.Average(r => r.Rate) >= 3).Count() > src.Items.Count() / 1.333 : true;
+                    dest.Reliability = src.Items?.Where(x => x.Ratings?.Count() > 0).Count() > 0 ? src.Items.Count()
+                    - src.Items.Where(x => x.Ratings.Average(r => r.Rate) >= 3).Count() > src.Items.Count() / 1.333 : true;
                 });
             });
 
