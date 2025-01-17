@@ -25,6 +25,27 @@ namespace WebStore.Endpoint.Controllers
             this.roleManager = roleManager;
             this.dtoProvider = dtoProvider;
         }
+
+        [HttpGet("grantadmin/{userid}")]
+        [Authorize(Roles = "Admin")]
+        public async Task GrantAdmin(string userid)
+        {
+            var user = await userManager.FindByIdAsync(userid);
+            if (user == null)
+                throw new ArgumentException("User not found");
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+
+        [HttpGet("revokeadmin/{userid}")]
+        [Authorize(Roles = "Admin")]
+        public async Task RevokeAdmin(string userid)
+        {
+            var user = await userManager.FindByIdAsync(userid);
+            if (user == null)
+                throw new ArgumentException("User not found");
+            await userManager.RemoveFromRoleAsync(user, "Admin");
+        }
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IEnumerable<UserViewDto> GetUsers()
