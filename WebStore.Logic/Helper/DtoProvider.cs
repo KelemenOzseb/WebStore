@@ -22,6 +22,7 @@ namespace WebStore.Logic.Helper
                 .AfterMap((src, dest) =>
                 {
                     dest.AverageRating = src.Ratings?.Count > 0 ? src.Ratings.Average(r => r.Rate) : 0;
+                    dest.StoreName = src.Store.Name;
                 });
                 cfg.CreateMap<Item, ItemViewDto>();
                 cfg.CreateMap<ItemCreateDto, Item>();

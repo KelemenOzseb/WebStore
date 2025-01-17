@@ -10,6 +10,7 @@ namespace WebStore.Entities.Dtos.Item
 {
     public class ItemViewDto
     {
+        public string Id { get; set; }
         public string StoreId { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
