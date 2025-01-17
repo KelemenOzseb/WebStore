@@ -15,6 +15,7 @@ namespace WebStore.Endpoint.Controllers
             this.logic = logic;
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public void AddItems(ItemCreateDto dto)
         {
             logic.AddItem(dto);
@@ -26,6 +27,7 @@ namespace WebStore.Endpoint.Controllers
             return logic.GetAllItems();
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public void UpdateItem(string id, [FromBody] ItemCreateDto dto)
         {
             logic.UpdateItem(id, dto);
@@ -35,6 +37,12 @@ namespace WebStore.Endpoint.Controllers
         public ItemViewDto GetItem(string id)
         {
             return logic.GetItem(id);
+        }
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public void DeleteMovie(string id)
+        {
+            logic.DeleteItem(id);
         }
     }
 }

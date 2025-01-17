@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebStore.Entities.Dtos.Store;
 using WebStore.Logic.Logic;
 
@@ -14,6 +15,7 @@ namespace WebStore.Endpoint.Controllers
             this.logic = logic;
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public void AddStore(StoreCreateDto dto)
         {
             logic.AddStore(dto);
@@ -25,6 +27,7 @@ namespace WebStore.Endpoint.Controllers
             return logic.GetAllStores();
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public void UpdateStore(string id, [FromBody] StoreCreateDto dto)
         {
             logic.UpdateStore(id, dto);
@@ -34,6 +37,12 @@ namespace WebStore.Endpoint.Controllers
         public StoreViewDto GetStore(string id)
         {
             return logic.GetStore(id);
+        }
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public void DeleteStore(string id)
+        {
+            logic.DeleteStore(id);
         }
     }
 }

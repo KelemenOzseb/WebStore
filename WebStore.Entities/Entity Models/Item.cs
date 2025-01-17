@@ -43,7 +43,7 @@ namespace WebStore.Entities.Entity_Models
 
         [NotMapped]
         public virtual Store? Store { get; set; }
-
+        
         [NotMapped]
         public virtual ICollection<Rating>? Ratings { get; set; }
     }
