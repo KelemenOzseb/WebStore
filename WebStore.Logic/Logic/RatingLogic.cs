@@ -19,10 +19,11 @@ namespace WebStore.Logic.Logic
             this.repo = repo;
             this.dtoProvider = dtoProvider;
         }
-        public void AddRating(RatingCreateDto dto)
+        public void AddRating(RatingCreateDto dto, string userId)
         {
-            Rating rating = dtoProvider.Mapper.Map<Rating>(dto);
-            repo.Create(rating);
+            var model = dtoProvider.Mapper.Map<Rating>(dto);
+            model.UserId = userId;
+            repo.Create(model);
         }
     }
 }

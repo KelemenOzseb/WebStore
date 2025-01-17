@@ -26,6 +26,9 @@ namespace WebStore.Entities.Entity_Models
         public string Id { get; set; }
 
         [StringLength(50)]
+        public string UserId { get; set; }
+
+        [StringLength(50)]
         public string ItemId { get; set; }
 
         [NotMapped]

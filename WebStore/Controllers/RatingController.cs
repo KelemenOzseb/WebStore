@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data;
 using WebStore.Entities.Dtos.Rating;
 using WebStore.Logic.Logic;
 
@@ -10,15 +12,19 @@ namespace WebStore.Endpoint.Controllers
     [Authorize]
     public class RatingController : ControllerBase
     {
+        UserManager<AppUser> userManager;
         RatingLogic logic { get; set; }
-        public RatingController(RatingLogic logic)
+        public RatingController(UserManager<AppUser> userManager, RatingLogic logic)
         {
+            this.userManager = userManager;
             this.logic = logic;
         }
+
         [HttpPost]
-        public void AddRating(RatingCreateDto dto)
+        public async Task AddRating(RatingCreateDto dto)
         {
-            logic.AddRating(dto);
+            var user = await userManager.GetUserAsync(User);
+            logic.AddRating(dto, user.Id);
         }
     }
 }
