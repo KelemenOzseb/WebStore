@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebStore.Data;
+using WebStore.Logic.Helper;
+using WebStore.Logic.Logic;
 
 namespace WebStore.Endpoint
 {
@@ -9,6 +11,10 @@ namespace WebStore.Endpoint
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddTransient(typeof(Repository<>));
+            builder.Services.AddTransient<ItemLogic>();
+            builder.Services.AddTransient<StoreLogic>();
+            builder.Services.AddTransient<DtoProvider>();
             // Add services to the container.
             builder.Services.AddDbContext<ShopContext>(options =>
             {
