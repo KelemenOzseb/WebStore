@@ -21,6 +21,7 @@ namespace WebStore.Endpoint
             builder.Services.AddTransient(typeof(Repository<>));
             builder.Services.AddTransient<ItemLogic>();
             builder.Services.AddTransient<RatingLogic>();
+            builder.Services.AddTransient<ShoppingCartLogic>();
             builder.Services.AddTransient<StoreLogic>();
             builder.Services.AddTransient<DtoProvider>();
             // Add services to the container.

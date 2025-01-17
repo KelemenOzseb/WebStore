@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebStore.Data.ShoppingCart;
 using WebStore.Data;
+using WebStore.Entities.Dtos.ShoppingCart;
 
 namespace WebStore.Logic.Logic
 {
@@ -46,7 +47,7 @@ namespace WebStore.Logic.Logic
             };
         }
 
-        public void AddItemToCart(string userId, string itemId, int quantity)
+        public void AddItemToCart(string userId, AddItemDto dto)
         {
             var cart = shoppingCartRepo.GetAll()
                 .FirstOrDefault(c => c.UserId == userId);
@@ -63,16 +64,16 @@ namespace WebStore.Logic.Logic
             }
 
             var existingItem = cart.ShoppingCartItems?
-                .FirstOrDefault(i => i.ItemId == itemId);
+                .FirstOrDefault(i => i.ItemId == dto.ItemId);
 
             if (existingItem != null)
             {
-                existingItem.Quantity += quantity;
+                existingItem.Quantity += dto.Quantity;
                 shoppingCartItemRepo.Update(existingItem);
             }
             else
             {
-                var newItem = new ShoppingCartItem(itemId, quantity)
+                var newItem = new ShoppingCartItem(dto.ItemId, dto.Quantity)
                 {
                     ShoppingCartId = cart.Id
                 };
