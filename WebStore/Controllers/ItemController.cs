@@ -26,7 +26,6 @@ namespace WebStore.Endpoint.Controllers
             return logic.GetAllItems();
         }
         [HttpPut("{id}")]
-        [Authorize]
         public void UpdateItem(string id, [FromBody] ItemCreateDto dto)
         {
             logic.UpdateItem(id, dto);
