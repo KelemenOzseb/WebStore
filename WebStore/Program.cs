@@ -24,8 +24,7 @@ namespace WebStore.Endpoint
             builder.Services.AddTransient<StoreLogic>();
             builder.Services.AddTransient<DtoProvider>();
             // Add services to the container.
-            //builder.Services.AddTransient<UserManager<IdentityUser>>();
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+            builder.Services.AddIdentity<AppUser, IdentityRole>(
                     option =>
                     {
                         option.Password.RequireDigit = false;
