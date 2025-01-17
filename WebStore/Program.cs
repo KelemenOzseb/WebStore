@@ -12,6 +12,7 @@ namespace WebStore.Endpoint
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddTransient(typeof(Repository<>));
+            builder.Services.AddTransient<RatingLogic>();
             builder.Services.AddTransient<ItemLogic>();
             builder.Services.AddTransient<StoreLogic>();
             builder.Services.AddTransient<DtoProvider>();
