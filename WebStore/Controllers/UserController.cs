@@ -5,7 +5,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebStore.Data;
 using WebStore.Entities.Dtos.User;
+using WebStore.Logic.Helper;
 
 namespace WebStore.Endpoint.Controllers
 {
@@ -13,17 +15,45 @@ namespace WebStore.Endpoint.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        UserManager<IdentityUser> userManager;
-        public UserController(UserManager<IdentityUser> userManager)
+        UserManager<AppUser> userManager;
+        RoleManager<IdentityRole> roleManager;
+        DtoProvider dtoProvider;
+
+        public UserController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, DtoProvider dtoProvider)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
+            this.dtoProvider = dtoProvider;
         }
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<UserViewDto> GetUsers()
+        {
+            return userManager.Users.Select(t =>
+                dtoProvider.Mapper.Map<UserViewDto>(t)
+            );
+        }
+
         [HttpPost("register")]
         public async Task Register(UserInputDto dto)
         {
-            var user = new IdentityUser(dto.UserName);
+            var free = await userManager.FindByNameAsync(dto.UserName);
+            if (free != null)
+            {
+                throw new ArgumentException("This username is already taken.");
+            }
+            var user = new AppUser(dto.UserName);
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
             await userManager.CreateAsync(user, dto.Password);
+            if (userManager.Users.Count() == 1)
+            {
+                //adminná előléptetés
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginInputDto dto)
         {
