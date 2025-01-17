@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using WebStore.Data.ShoppingCart;
 using WebStore.Entities.Entity_Models;
 
 namespace WebStore.Data
@@ -16,6 +17,10 @@ namespace WebStore.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<WebStore.Data.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+
         public ShopContext(DbContextOptions<ShopContext> ctx) : base(ctx) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +34,16 @@ namespace WebStore.Data
                 .WithOne(i => i.Store)
                 .HasForeignKey(i => i.StoreId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ShoppingCartItem>()
+                .HasOne(sci => sci.ShoppingCart)
+                .WithMany(sc => sc.ShoppingCartItems)
+                .HasForeignKey(sci => sci.ShoppingCartId);
+
+            modelBuilder.Entity<ShoppingCartItem>()
+                .HasOne(sci => sci.Item)
+                .WithMany()
+                .HasForeignKey(sci => sci.ItemId);
+
             base.OnModelCreating(modelBuilder);
         }
     }
