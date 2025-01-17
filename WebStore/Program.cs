@@ -29,6 +29,7 @@ namespace WebStore.Endpoint
                       option.Password.RequireLowercase = false;
                   }
             )
+              .AddEntityFrameworkStores<ShopContext>()
               .AddDefaultTokenProviders();
 
             // Add services to the container.
