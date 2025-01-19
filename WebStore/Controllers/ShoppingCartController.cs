@@ -13,8 +13,8 @@ namespace WebStore.Endpoint.Controllers
     [Authorize]
     public class ShoppingCartController : ControllerBase
     {
-        UserManager<AppUser> userManager;
-        ShoppingCartLogic logic;
+        private readonly UserManager<AppUser> userManager;
+        private readonly ShoppingCartLogic logic;
 
         public ShoppingCartController(UserManager<AppUser> userManager, ShoppingCartLogic logic)
         {

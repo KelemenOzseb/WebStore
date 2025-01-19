@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebStore.Entities.Dtos.User
 {
-    public class LoginInputDto
+    public class LoginInput
     {
         [MinLength(6)]
         public required string UserName { get; set; } = "";
