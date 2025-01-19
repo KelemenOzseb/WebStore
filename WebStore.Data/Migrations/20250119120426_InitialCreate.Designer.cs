@@ -12,8 +12,8 @@ using WebStore.Data;
 namespace WebStore.Data.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20250117203710_ShoppingCartCreate")]
-    partial class ShoppingCartCreate
+    [Migration("20250119120426_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

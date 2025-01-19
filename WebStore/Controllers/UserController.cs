@@ -76,7 +76,7 @@ namespace WebStore.Endpoint.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginInputDto dto)
+        public async Task<IActionResult> Login(LoginInput dto)
         {
             var user = await userManager.FindByNameAsync(dto.UserName);
             if (user == null)

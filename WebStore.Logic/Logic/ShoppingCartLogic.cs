@@ -36,8 +36,8 @@ namespace WebStore.Logic.Logic
             var items = cart.ShoppingCartItems.Select(i => new ShoppingCartItemViewDto
             {
                 ItemId = i.ItemId,
-                Name = i.Item?.Name ?? "Unknown Item",
-                Price = i.Item?.Price ?? 0,
+                Name = i.Item?.Name ?? "Unknown Item", // Feltételezve, hogy az Item entitásnak van Name tulajdonsága
+                Price = i.Item?.Price ?? 0,           // Feltételezve, hogy az Item entitásnak van Price tulajdonsága
                 Quantity = i.Quantity
             });
 
@@ -47,7 +47,7 @@ namespace WebStore.Logic.Logic
             };
         }
 
-        public void AddItemToCart(string userId, AddItemDto dto)
+        public void AddItemToCart(string userId, string itemId, int quantity)
         {
             var cart = shoppingCartRepo.GetAll()
                 .FirstOrDefault(c => c.UserId == userId);
@@ -64,16 +64,16 @@ namespace WebStore.Logic.Logic
             }
 
             var existingItem = cart.ShoppingCartItems?
-                .FirstOrDefault(i => i.ItemId == dto.ItemId);
+                .FirstOrDefault(i => i.ItemId == itemId);
 
             if (existingItem != null)
             {
-                existingItem.Quantity += dto.Quantity;
+                existingItem.Quantity += quantity;
                 shoppingCartItemRepo.Update(existingItem);
             }
             else
             {
-                var newItem = new ShoppingCartItem(dto.ItemId, dto.Quantity)
+                var newItem = new ShoppingCartItem(itemId, quantity)
                 {
                     ShoppingCartId = cart.Id
                 };
