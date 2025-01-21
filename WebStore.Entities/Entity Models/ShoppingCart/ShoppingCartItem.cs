@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using WebStore.Entities.Entity_Models;
 using IIdentity = WebStore.Entities.Helper.IIdentity;
 
-namespace WebStore.Data.ShoppingCart
+namespace WebStore.Entities.Entity_Models.ShoppingCart
 {
     public class ShoppingCartItem : IIdentity
     {

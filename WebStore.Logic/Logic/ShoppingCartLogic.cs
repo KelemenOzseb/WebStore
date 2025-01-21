@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebStore.Data.ShoppingCart;
 using WebStore.Data;
 using WebStore.Entities.Dtos.ShoppingCart;
+using WebStore.Entities.Entity_Models.ShoppingCart;
 
 namespace WebStore.Logic.Logic
 {

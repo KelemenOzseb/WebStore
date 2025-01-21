@@ -7,8 +7,8 @@ using System.Reflection.Emit;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using WebStore.Data.ShoppingCart;
 using WebStore.Entities.Entity_Models;
+using WebStore.Entities.Entity_Models.ShoppingCart;
 
 namespace WebStore.Data
 {
@@ -17,7 +17,7 @@ namespace WebStore.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Store> Stores { get; set; }
-        public DbSet<WebStore.Data.ShoppingCart.ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
 

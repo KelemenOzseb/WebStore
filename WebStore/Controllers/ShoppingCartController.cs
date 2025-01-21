@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Data.ShoppingCart;
 using WebStore.Data;
 using WebStore.Logic.Logic;
 using WebStore.Entities.Dtos.ShoppingCart;

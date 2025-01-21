@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebStore.Data.ShoppingCart
+namespace WebStore.Entities.Dtos.ShoppingCart
 {
     public class ShoppingCartViewDto
     {
